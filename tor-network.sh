@@ -5,7 +5,7 @@ LIST_NAME="tor"
 
 # Check if ipset is installed
 if ! command -v ipset &> /dev/null; then
-	echo "❌ Error: ipset is not installed. Please install it first."
+	echo "❌ Error: ipset não está instalado, instale antes de executar."
 	exit 1
 fi
 
@@ -18,7 +18,7 @@ if sudo ipset list -n | grep -q "^$LIST_NAME$"; then
 	fi
 else
 	#Não existindo vou cria-la
-    echo "⚠️ A lista '$LIST_NAME' não existe. Criando a lista..."
+    echo "⚠️ A lista '$LIST_NAME' não existe. Criando a lista e aplicando regras ao iptables"
     sudo ipset create $LIST_NAME hash:ip
 	#E adicionar regras ao iptables
 	iptables -I INPUT -m set --match-set $LIST_NAME src -j DROP

@@ -3,6 +3,12 @@
 # Nome da lista no ipset
 LIST_NAME="tor"
 
+# Check if ipset is installed
+if ! command -v ipset &> /dev/null; then
+	echo "❌ Error: ipset is not installed. Please install it first."
+	exit 1
+fi
+
 # Verifica se a lista existe
 if sudo ipset list -n | grep -q "^$LIST_NAME$"; then
 	#Irei dar flush na lista somente no dia 01 de cada mês

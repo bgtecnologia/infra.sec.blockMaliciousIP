@@ -21,7 +21,7 @@ else
 fi
 
 curl -sSL "https://raw.githubusercontent.com/SecOps-Institute/Tor-IP-Addresses/master/tor-exit-nodes.lst" | sed '/^#/d' | while read IP; do
-        if ! ipset -q test $LIST_NAME $IP; then
-            ipset -q -A $LIST_NAME $IP
-        fi
+	if ! ipset -q test $LIST_NAME $IP; then
+		ipset -q -A $LIST_NAME $IP
+	fi
 done

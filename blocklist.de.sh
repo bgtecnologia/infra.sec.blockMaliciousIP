@@ -29,7 +29,7 @@ fi
 
 echo "Carregando a lista do blocklist.de no ipset"
 wget -O /tmp/blocklist.txt https://lists.blocklist.de/lists/all.txt
-while read ip; do 
+while read IP; do 
 	if ! ipset -q test $LIST_NAME $IP; then
 		ipset -q -A $LIST_NAME $IP
 	fi
